@@ -20,4 +20,4 @@ ax.bar(l1, l3)
 
 # Display the figure
 plt.show()
-fig
+display(fig)
