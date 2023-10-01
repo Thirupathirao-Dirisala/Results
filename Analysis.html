@@ -18,28 +18,36 @@
 import pandas as pd
 import js
 import matplotlib.pyplot as plt
-
 r=js.localStorage.getItem('myValue')
+y=js.localStorage.getItem('myYear')
+s=js.localStoarge.getItem('mySem')
 from pyodide.http import open_url
-url = 'https://raw.githubusercontent.com/Boddudinesh/automation/main/SEM-3.2.csv'
-df = pd.read_csv(open_url(url))
-x=df.loc[df["REDG NO"] == r]
-d = x.to_dict(orient='records')
-l1 = list(d[0].keys())[4:]
-l1[-2]="MAD LAB "
-l2 = list(d[0].values())[4:]
-l3=[]
-for i in l2:
-    l3.append(int(i.split()[0]))
-fig, ax = plt.subplots()  # Use subplots to create a figure and axis
-
-bars=ax.bar(l1, l3)
-for bar in bars:
-    yval = bar.get_height()
-    plt.text(bar.get_x() + bar.get_width()/2.0, yval, int(yval), va='bottom')
-
-display(fig)
-        
+for k in range(1,y+1):
+    for j in range(1,3):
+        if k==y and j>=s:
+            break
+        else:
+            l1=[]
+            l2=[]
+            l3=[]
+            url = 'https://raw.githubusercontent.com/Boddudinesh/automation/main/SEM-3.2.csv'
+            df = pd.read_csv(open_url(url))
+            x=df.loc[df["REDG NO"] == n]
+            d = x.to_dict(orient='records')
+            l1 = list(d[0].keys())[4:]
+            l2 = list(d[0].values())[4:]
+            m1 = list(d[0].keys())[:4]
+            m2 = list(d[0].values())[:4]
+            for i in range(len(m1)):
+                print(m1[i],":",m2[i])
+            for i in l2:
+                l3.append(int(i.split()[0]))
+            print(f'SEM-{k}.{j} Results')
+            plt.bar(l1,l3,facecolor="green",label=l3)
+            plt.show()
+            print("",end="")
+            plt.pie(l3,labels=l1,autopct="%.0f%%")
+            plt.show()
 
     </py-script>
           
