@@ -19,8 +19,8 @@ import pandas as pd
 import js
 import matplotlib.pyplot as plt
 r=js.localStorage.getItem('myValue')
-y=js.localStorage.getItem('myYear')
-s=js.localStoarge.getItem('mySem')
+y=int(js.localStorage.getItem('myYear'))
+s=int(js.localStoarge.getItem('mySem'))
 from pyodide.http import open_url
 for k in range(1,y+1):
     for j in range(1,3):
