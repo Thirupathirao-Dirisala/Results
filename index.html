@@ -6,10 +6,15 @@
         // Get the value entered by the user
         var input = document.getElementById('value-input');
         var value = input.value;
+        var input2 = document.getElementById('value-year');
+        var value2 = input2.value;
+        var input3 = document.getElementById('value-sem');
+        var value3 = input3.value;
 
         // Store the value in localStorage
         localStorage.setItem('myValue', value);
-
+        localStorage.setItem('myYear', value2);
+        localStorage.setItem('mySem', value3);
         // Redirect to the second page
         window.location.href = 'Analysis.html';
       }
@@ -19,6 +24,8 @@
     <h1>Page 1</h1>
     <p>Enter a value:</p>
     <input type="text" id="value-input">
+    <input type="text" id="value-year"/>
+    <input type="text" id="value-sem"/>
     <button onclick="submitValue()">Submit</button>
   </body>
 </html>
