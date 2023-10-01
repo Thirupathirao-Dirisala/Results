@@ -35,17 +35,13 @@ for k in range(1,y+1):
             d = x.to_dict(orient='records')
             l1 = list(d[0].keys())[4:]
             l2 = list(d[0].values())[4:]
-            m1 = list(d[0].keys())[:4]
-            m2 = list(d[0].values())[:4]
-            for i in range(len(m1)):
-                print(m1[i],":",m2[i])
             for i in l2:
                 l3.append(int(i.split()[0]))
-            print(f'SEM-{k}.{j} Results')
-            plt.bar(l1,l3,facecolor="green",label=l3)
-            display(plt)
-            plt.pie(l3,labels=l1,autopct="%.0f%%")
-            display(plt)
+            display(f'SEM-{k}.{j} Results')
+            b=plt.bar(l1,l3,facecolor="green",label=l3)
+            display(b)
+            p=plt.pie(l3,labels=l1,autopct="%.0f%%")
+            display(p)
     </py-script>
 </body>
 </html>
