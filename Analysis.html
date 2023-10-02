@@ -48,7 +48,7 @@ for k in range(1,y+1):
             ]
 
             # Create an HTML string for the table
-            html_table = "<table border='1'>"
+            html_table = "<table border='1'><tbody>"
             
             # Add the table header
             html_table += "<tr>"
@@ -64,7 +64,7 @@ for k in range(1,y+1):
                 html_table += "</tr>"
             
             # Close the table tag
-            html_table += "</table>"
+            html_table += "</tbody></table>"
             
             # Display the HTML table
             display(HTML(html_table))
