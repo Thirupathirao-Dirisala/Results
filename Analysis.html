@@ -18,8 +18,10 @@
 </head>
 <body>
 
-    <h3 id="hel"></h3>
-    <div id="lineplot"></div>
+    <h1 id="hel1"></h1>
+    <h1 id="hel2"></h1>
+    <div id="line1"></div>
+    <div id="line2"></div>
     <py-config>
         packages = ["pandas","matplotlib"]
     </py-config>
@@ -48,22 +50,20 @@ for k in range(1,y+1):
             l2 = list(d[0].values())[4:]
             for i in l2:
                 l3.append(int(i.split()[0]))
-            ele=document.createElement("h1")
-            ele.innerText=f'SEM-{k}.{j} Results'
-            document.body.appendChild(ele)
+            txt=f'SEM-{k}.{j} Results'
+            display(txt,target=f"hel{j}")
+            txt=""
             html_table="<table><tr><th>Subject Title</th><th>Student Marks</th></tr>"
             for w in range(len(l3)):
                 html_table+="<tr><td>"+l1[w]+"</td><td>"+str(l3[w])+"</td></tr>"
             html_table+="</table>"
-            ele1=document.createElement("div")
-            document.body.appendChild(ele1)
-            ele1.innerHTML=display(HTML(html_table))
-            plt.rcParams["figure.figsize"]=(10,6)
+            display(HTML(html_table),target=f"line{j}")
+            plt.rcParams["figure.figsize"]=(9,9)
             plt.subplot(1,2,1)
             plt.bar(l1,l3,facecolor="orange",label=l3,edgecolor="black")
             plt.subplot(1,2,2)
             plt.pie(l3,labels=l1,autopct="%.0f%%")
-            ele1.innerHTML=display(plt)
+            display(plt,target=f"line{j}")
             plt.clf()
     </py-script>
 </body>
