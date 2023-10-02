@@ -47,7 +47,7 @@ for k in range(1,y+1):
             display(f'SEM-{k}.{j} Results',target="hel")
             html_table="<table><tr><th>Subject Title</th><th>Student Marks</th></tr>"
             for i in range(len(l1)):
-                html_table+="<tr><td>"+l1[i]+"</td><td>"+l3[i]+"</td></tr>"
+                html_table+="<tr><td>"+l1[i]+"</td><td>"+str(l3[i])+"</td></tr>"
             html_table+="</table>"
             display(HTML(html_table))
             plt.bar(l1,l3,facecolor="green",label=l3)
