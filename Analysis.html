@@ -39,36 +39,7 @@ for k in range(1,y+1):
             for i in l2:
                 l3.append(int(i.split()[0]))
             display(f'SEM-{k}.{j} Results',target="hel")
-            # Define the table data as a list of lists
-            table_data = [
-                ["Name", "Age", "Location"],
-                ["Alice", "25", "New York"],
-                ["Bob", "30", "Los Angeles"],
-                ["Charlie", "22", "Chicago"],
-            ]
-
-            # Create an HTML string for the table
-            html_table = "<table border='1'><tbody>"
-            
-            # Add the table header
-            html_table += "<tr>"
-            for header in table_data[0]:
-                html_table += f"<th>{header}</th>"
-            html_table += "</tr>"
-            
-            # Add the table rows
-            for row in table_data[1:]:
-                html_table += "<tr>"
-                for cell in row:
-                    html_table += f"<td>{cell}</td>"
-                html_table += "</tr>"
-            
-            # Close the table tag
-            html_table += "</tbody></table>"
-            
-            # Display the HTML table
-            display(HTML(html_table))
-
+            display(HTML(df.to_html()))
             plt.bar(l1,l3,facecolor="green",label=l3)
             display(plt)
             plt.clf()
