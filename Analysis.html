@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <img id="imag" alt="Photo"/><br/>
+    <img id="imag" src="http://becbapatla.ac.in:8080/STUDENTINFO/photos1/Y20ACS441.jpg" alt="Photo"/><br/>
     <h1 id="hel1"></h1>
     <div id="line1"></div>
     <h1 id="hel2"></h1>
@@ -35,13 +35,6 @@ y=int(js.localStorage.getItem('myYear'))
 s=int(js.localStorage.getItem('mySem'))
 from pyodide.http import open_url
 from pyodide.http import pyfetch
-from PIL import Image
-import requests
-from io import BytesIO
-response = requests.get(f"http://becbapatla.ac.in:8080/STUDENTINFO/photos1/{R}.jpg")
-image_data = BytesIO(response.content)
-image = Image.open(image_data)
-display(image,target="imag")
 for k in range(1,y+1):
     for j in range(1,3):
         if k==y and j>=s:
