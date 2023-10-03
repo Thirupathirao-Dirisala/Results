@@ -34,12 +34,15 @@ R=r.upper()
 y=int(js.localStorage.getItem('myYear'))
 s=int(js.localStorage.getItem('mySem'))
 from pyodide.http import open_url
-from PIL import Image
-import requests
+from pyodide.http import pyfetch
+import asyncio
 from io import BytesIO
-response = requests.get(url)
-img = Image.open(BytesIO(response.content))
-display(img,target="image")
+import matplotlib.pyplot as plt
+import imageio.v3 as iio
+response = pyfetch(url="https://cataas.com/cat", method="GET")
+img = iio.imread(BytesIO(response.bytes()), index=None)
+imgplot = plt.imshow(img)
+display(imgplot,target="image")
 for k in range(1,y+1):
     for j in range(1,3):
         if k==y and j>=s:
