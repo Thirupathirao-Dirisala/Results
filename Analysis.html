@@ -31,16 +31,16 @@ th{
     </style>
 </head>
 <body>
-    <py-script>
-    import js
-    from js import document
-    r=js.localStorage.getItem('myValue')
-    </py-script>
     <div class="main">
         <table >
             <tr>
                 <th>Regd.No.</th>
-                <td><py-script>display(R)</py-script></td>
+                <td><py-script>
+                    import js
+                    from js import document
+                    r=js.localStorage.getItem('myValue')
+                    display(r)</py-script>
+                </td>
                 <td rowspan="3"> <img id="imag" border="2" src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/y20ait506.jpg" width="220px" height="220px" alt="Photo"/></td>
             </tr>
             <tr>
