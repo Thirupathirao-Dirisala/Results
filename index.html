@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Bapatla Engineering College</title>
     <script>
       function submitValue() {
         // Get the value entered by the user
         var input = document.getElementById('value-input');
         var value = input.value;
-    
+
         // Store the value in localStorage
         localStorage.setItem('myValue', value);
-      
+
         // Redirect to the second page
         window.location.href = 'Analysis.html';
       }
     </script>
+    <style>
+      div{
+    margin-top:30px;
+    margin-bottom:30px;
+    margin-left:100px;
+    background-color:white;
+    margin-right:100px;
+    border:1px black solid;
+    border-radius:5px;
+  }
+  body{
+    background-color:#91E0FF;
+  }
+    </style>
   </head>
   <body>
-    <h1>Page 1</h1>
-    <p>Enter a value:</p>
-    <input type="text" id="value-input">
-    <button onclick="submitValue()">Submit</button>
+      <marquee direction="right" behavior="alternate" style="color:red;font-weight:bold;">***This website is temporarily designed for final year IT students only***</marquee>
+  <div style="text-align:center">
+    <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec2.jpeg" border="1" width="1045px" style="border-radius:5px" height="350px"/>
+    <h2 style="font-family:old english text mt;color:#00ABF0">Bapatla Engineering College</h2>
+    <h4 style="color:#00ABF0">Student Results Form</h4>
+    <div style="height:10px;width:800px;background-color:grey"></div>
+    <p style="text-align:center;font-weight:bold">Enter your Regd.no</p>
+    <input style="border-radius:5px;height:20px;width:200px;" type="text" id="value-input"><br/><br/>
+    <button onclick="submitValue()">Submit</button><br/><br/><br/><br/>
+  </div>
   </body>
 </html>
