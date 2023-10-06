@@ -31,6 +31,12 @@ th{
     </style>
 </head>
 <body>
+    <py-script>
+    import js
+    from js import document
+    r=js.localStorage.getItem('myValue')
+    R=r.upper()
+    </py-script>
     <div class="main">
         <table >
             <tr>
