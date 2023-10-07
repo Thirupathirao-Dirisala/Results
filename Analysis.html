@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width;initial-scale=1.0">
     <title>Bapatla Engineering College</title>
     <link
             rel="stylesheet"
@@ -42,7 +43,7 @@
 
 </head>
 <body>
-    <marquee direction="right" behavior="alternate" style="color:red;font-weight:bold;">***If Same Marks are scored by two students then the rank will be considered based on name***</marquee>
+    <marquee direction="right" behavior="alternate" style="color:red;font-weight:bold;">***If Same Marks are scored by two students then the rank will considered based on name***</marquee>
     <div id="main" align="center">
         <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec2.jpeg" border="1" width="100%" style="border-radius:5px" height="350px"/>
         <div id="details">
@@ -82,56 +83,78 @@
         packages = ["pandas","matplotlib"]
     </py-config>
     <py-script>
-        try:
-            n=[1,4]
             import pandas as pd
             import js
             from js import document
             import matplotlib.pyplot as plt
+            plt.rcParams["figure.figsize"] = (10,6)
             from pyodide.http import open_url
             k=js.localStorage.getItem('myValue')
             r=k.lower()
             ele=document.getElementById("imag")
+            cnt=0
             ele.setAttribute("src",f"https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/{r}.jpg")
-            for i in n:
+            for i in range(1,6):
                 url = f"https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/IT-4.{i}.csv"
                 df = pd.read_csv(open_url(url))
-                x=df.loc[df["Reg No"] == r]
-                cols=x.columns.tolist()
-                subjects=cols[7:14]
-                marks=x.values.tolist()[0]
-                document.getElementById("regdno").innerHTML=marks[0].upper()
-                document.getElementById("name").innerHTML=marks[1]
-                document.getElementById("fname").innerHTML=marks[2]
-                rank_m=marks[4]
-                rank_s=marks[6]
-                sgpa=marks[5]
-                total1=marks[3]
-                sub_marks=marks[7:14]
-                topper= df[df['total'] == df['total'].max()]
-                topper_m=topper.values.tolist()[0]
-                total2=topper_m[2]
-                topper_m=topper_m[7:14]
-                p=pd.DataFrame({r:sub_marks,"1st ranker":topper_m},index=subjects)
-                ax=p.plot.bar()
-                plt.yticks(range(0,160,20))
-                plt.xticks(rotation=360)
-                ax.set_facecolor("#e0e0e0")
-                for p in ax.patches:
-                    ax.annotate(f'{p.get_height()}', (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='bottom', fontsize=10, color='black', xytext=(0, 5), textcoords='offset points')
-                subj=marks[-7:-1]
-                subj.append(marks[-1])
-                subj_rank=marks[-14:-6]
-                tabl=pd.DataFrame(list(zip(subj,sub_marks,subj_rank)),columns=['Subject Title & Code','Marks','Subject Rank'])
-                html_table=tabl.to_html(index=False)
-                display(f"Semester:{i}",target=f"s{i}")
-                display(HTML(html_table),target=f"sem{i}")
-                display(plt,target=f"sem{i}")
-                plt.clf()
-                html_table=""
-        except:
-            from js import window
-            window.location.href="Error.html"
+                re=df["Reg No"].tolist()
+                if r in re:
+                    x=df.loc[df["Reg No"] == r]
+                    cols=x.columns.tolist()
+                    marks=x.values.tolist()[0]
+                    document.getElementById("regdno").innerHTML=marks[0].upper()
+                    document.getElementById("name").innerHTML=marks[1]
+                    document.getElementById("fname").innerHTML=marks[2]
+                    if i==1 or i==4:
+                        subjects=cols[7:14]
+                        rank_m=marks[4]
+                        rank_s=marks[6]
+                        sgpa=marks[5]
+                        total1=marks[3]
+                        sub_marks=marks[7:14]
+                        topper= df[df['total'] == df['total'].max()]
+                        topper_m=topper.values.tolist()[0]
+                        total2=topper_m[2]
+                        topper_m=topper_m[7:14]
+                        subj=marks[-7:-1]
+                        subj.append(marks[-1])
+                        subj_rank=marks[-14:-6]
+                    else:
+                        subjects=cols[7:16]
+                        rank_m=marks[4]
+                        rank_s=marks[6]
+                        sgpa=marks[5]
+                        total1=marks[3]
+                        sub_marks=marks[7:16]
+                        topper= df[df['total'] == df['total'].max()]
+                        topper_m=topper.values.tolist()[0]
+                        total2=topper_m[2]
+                        topper_m=topper_m[7:16]
+                        subj=marks[-9:-1]
+                        subj.append(marks[-1])
+                        subj_rank=marks[-18:-9]
+
+                    p=pd.DataFrame({r:sub_marks,"1st ranker":topper_m},index=subjects)
+                    ax=p.plot.bar(width=0.4)
+                    plt.yticks(range(0,160,20))
+                    plt.xticks(rotation=360)
+                    ax.set_facecolor("#e0e0e0")
+                    for p in ax.patches:
+                        ax.annotate(f'{p.get_height()}', (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='bottom', fontsize=10, color='black', xytext=(0, 5), textcoords='offset points')
+
+                    tabl=pd.DataFrame(list(zip(subj,sub_marks,subj_rank)),columns=['Subject Title & Code','Marks','Subject Rank'])
+                    html_table=tabl.to_html(index=False)
+                    display(f"Semester:{i}",target=f"s{i}")
+                    display(HTML(html_table),target=f"sem{i}")
+                    display(plt,target=f"sem{i}")
+                    plt.clf()
+                    html_table=""
+                    cnt+=1
+                else:
+                    continue
+            if cnt==0:
+                from js import window
+                window.location.href = 'Error.html'
 
 </py-script>
 
