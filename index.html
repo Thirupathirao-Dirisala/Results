@@ -1,21 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Bapatla Engineering College</title>
-    <script>
-      function submitValue() {
-        // Get the value entered by the user
-        var input = document.getElementById('value-input');
-        var value = input.value;
-
-        // Store the value in localStorage
-        localStorage.setItem('myValue', value);
-
-        // Redirect to the second page
-        window.location.href = 'Analysis.html';
-      }
-    </script>
     <style>
+     html,body{
+    min-width: 1100px;
+    }
       div{
     margin-top:30px;
     margin-bottom:30px;
@@ -33,13 +23,32 @@
   <body>
       <marquee direction="right" behavior="alternate" style="color:red;font-weight:bold;">***This website is temporarily designed for final year IT students only***</marquee>
   <div style="text-align:center">
-    <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec2.jpeg" border="1" width="100%" style="border-radius:5px" height="350px"/>
+    <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec.webp" border="1" width="100%" style="border-radius:5px" height="300px"/>
     <h2 style="font-family:old english text mt;color:#00ABF0">Bapatla Engineering College</h2>
     <h4 style="color:#00ABF0">Student Results Form</h4>
     <div style="height:10px;width:80%;background-color:grey"></div>
     <p style="text-align:center;font-weight:bold">Enter your Regd.no</p>
-    <input style="border-radius:5px;" type="text" id="value-input"><br/><br/>
-    <button type="submit" onclick="submitValue()">Submit</button><br/><br/><br/><br/>
+    <input style="border-radius:5px;height:20px;width:200px;" type="text" id="value-input"><br/><br/>
+    <button onclick="submitValue()" id="myBtn">Submit</button><br/><br/><br/><br/>
   </div>
+      <script>
+        var button = document.getElementById("myBtn");
+        var textBox = document.getElementById("value-input");
+        textBox.addEventListener("keypress", function (event) {
+
+            // Checking if key pressed is ENTER or not
+            // if the key pressed is ENTER
+            // click listener on button is called
+            if (event.keyCode == 13) {
+                button.click();
+            }
+        });
+            button.addEventListener("click", function () {
+            val=textBox.value;
+             localStorage.setItem('myValue', val);
+            window.location.href="Analysis.html";
+        });
+
+    </script>
   </body>
 </html>
