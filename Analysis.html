@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width;initial-scale=1.0">
     <title>Bapatla Engineering College</title>
     <link
             rel="stylesheet"
             href="https://pyscript.net/latest/pyscript.css"/>
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <style>
+    html,body{
+    min-width: 1100px;
+    }
   #main{
     margin-top:30px;
     margin-bottom:30px;
@@ -29,6 +31,13 @@
     height:50%;
     font-weight: bold;
     }
+    .dataframe>th{
+    text-align:center;
+    color:white;
+    width:40px;
+    height:50px;
+
+    }
     td{
         text-align:center;
         background-color:#91E0FF;
@@ -39,13 +48,34 @@
         width:80%;
         border-collapse:collapse;
     }
+    #se1,#se2,#se3,#se4,#se5{
+background: rgba(145, 224, 255, 0.51);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(145, 224, 255, 0.3);
+width:80%;
+font-weight:bold;
+    }
+    #sem{
+background: rgba(0, 171, 240, 1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(0, 171, 240, 0.3);
+width:80%;
+font-weight:bold;
+color:white;
+    }
 </style>
 
 </head>
 <body>
     <marquee direction="right" behavior="alternate" style="color:red;font-weight:bold;">***If Same Marks are scored by two students then the rank will considered based on name***</marquee>
     <div id="main" align="center">
-        <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec2.jpeg" border="1" width="100%" style="border-radius:5px" height="350px"/>
+        <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec.webp" border="1" width="100%" style="border-radius:5px" height="300px"/>
         <div id="details">
          <table style="border:3px black;border-radius:5px;width:80%;border-collapse:separate">
             <tr>
@@ -63,21 +93,29 @@
             </tr>
         </table>
         </div>
+        <p id="para" style="font-weight:bold;color:orange;font-size:30px;text-shadow:2px 2px #ff0000;"><img id="ima" src="">
+</p>
         <div id="sem1">
-            <h5 id="s1"></h5>
+            <h3 id="s1" style="font-weight:bold"></h3>
         </div>
+        <div id="se1"></div>
         <div id="sem2">
-            <h5 id="s2"></h5>
+            <h3 id="s2" style="font-weight:bold"></h3>
         </div>
+        <div id="se2"></div>
         <div id="sem3">
-            <h5 id="s3"></h5>
+            <h3 id="s3" style="font-weight:bold"></h3>
         </div>
+        <div id="se3"></div>
         <div id="sem4">
-            <h5 id="s4"></h5>
+            <h3 id="s4" style="font-weight:bold"></h3>
         </div>
+        <div id="se4"></div>
         <div id="sem5">
-            <h5 id="s5"></h5>
+            <h3 id="s5" style="font-weight:bold"></h3>
         </div>
+        <div id="se5"></div><br/><br/><br/>
+        <div id="sem"></div><br/>
     </div>
     <py-config>
         packages = ["pandas","matplotlib"]
@@ -92,6 +130,8 @@
             r=k.lower()
             ele=document.getElementById("imag")
             cnt=0
+            total=0
+            plt.rcParams['figure.figsize'] = (9, 5)
             ele.setAttribute("src",f"https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/{r}.jpg")
             for i in range(1,6):
                 url = f"https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/IT-4.{i}.csv"
@@ -134,7 +174,7 @@
                         subj_rank=marks[-18:-9]
 
                     p=pd.DataFrame({r:sub_marks,"1st ranker":topper_m},index=subjects)
-                    ax=p.plot.bar(width=0.4)
+                    ax=p.plot.bar()
                     plt.yticks(range(0,160,20))
                     plt.xticks(rotation=360)
                     ax.set_facecolor("#e0e0e0")
@@ -143,14 +183,25 @@
 
                     tabl=pd.DataFrame(list(zip(subj,sub_marks,subj_rank)),columns=['Subject Title & Code','Marks','Subject Rank'])
                     html_table=tabl.to_html(index=False)
-                    display(f"Semester:{i}",target=f"s{i}")
+                    display(f"Semester-{i}",target=f"s{i}")
                     display(HTML(html_table),target=f"sem{i}")
                     display(plt,target=f"sem{i}")
+                    str=f"Total Marks: {total1}Overall Rank: {rank_m}"
+                    display(str,target=f"se{i}")
+                    total+=total1
+                    str=f"SGPA: {sgpa} SGPA Rank: {rank_s}"
+                    display(str,target=f"se{i}")
                     plt.clf()
                     html_table=""
                     cnt+=1
                 else:
                     continue
+            display(f"Overall Marks : {total}",target="sem")
+            if total>3000:
+                el=document.getElementById("ima")
+                el.setAttribute("src","https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/celeb.webp")
+                s="&#x1F38A Congratulations You are the Topper of IT Branch &#x1F38A"
+                display(s,target="para")
             if cnt==0:
                 from js import window
                 window.location.href = 'Error.html'
