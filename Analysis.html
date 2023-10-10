@@ -6,10 +6,12 @@
     <link
             rel="stylesheet"
             href="https://pyscript.net/latest/pyscript.css"/>
+     <link href="https://fonts.googleapis.com/css?family=emboss" rel="stylesheet">
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <style>
     html,body{
     min-width: 1100px;
+    font-family:emboss;
     }
   #main{
     margin-top:30px;
@@ -30,17 +32,27 @@
     width:40%;
     height:50%;
     font-weight: bold;
+    font-size:20px;
     }
-    .dataframe>th{
+    thead{
     text-align:center;
     color:white;
     width:40px;
     height:50px;
+    font-size:20px;
 
+    }
+    h3{
+        font-size:20px;
     }
     td{
         text-align:center;
         background-color:#91E0FF;
+    }
+    #details>td{
+        text-align:center;
+        background-color:#91E0FF;
+        font-weight:bold;
     }
     table{
        border-radius:5px;
@@ -57,7 +69,7 @@ backdrop-filter: blur(5px);
 border: 1px solid rgba(145, 224, 255, 0.3);
 width:80%;
 font-weight:bold;
-font-size:25px;
+font-size:20px;
     }
     #sem{
 background: rgba(0, 171, 240, 1);
@@ -69,15 +81,15 @@ border: 1px solid rgba(0, 171, 240, 0.3);
 width:80%;
 font-weight:bold;
 color:white;
-font-size:25px;
+font-size:20px;
     }
 </style>
 
 </head>
 <body>
-    <marquee direction="right" behavior="alternate" style="color:red;font-weight:bold;">***If Same Marks are scored by two students then the rank will considered based on name***</marquee>
+    <marquee direction="right" behavior="alternate" style="color:red;font-weight:bold;font-size:20px;">***If Same Marks are scored by two students then the rank will considered based on name***</marquee>
     <div id="main" align="center">
-        <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec.png" border="1" width="100%" style="border-radius:5px" height="300px"/>
+        <img src="https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/bec.webp" border="1" width="100%" style="border-radius:5px" height="300px"/>
         <div id="details">
          <table style="border:3px black;border-radius:5px;width:80%;border-collapse:separate">
             <tr>
@@ -95,7 +107,7 @@ font-size:25px;
             </tr>
         </table>
         </div>
-        <p id="para" style="font-weight:bold;color:orange;font-size:30px;text-shadow:2px 2px #ff0000;"><img id="ima" src="">
+        <p id="para" style="font-weight:bold;color:orange;width:90%;font-size:30px;text-shadow:2px 2px #ff0000;"><img id="ima" src="">
 </p>
         <div id="sem1">
             <h3 id="s1" style="font-weight:bold"></h3>
@@ -188,6 +200,11 @@ font-size:25px;
                     display(f"Semester-{i}",target=f"s{i}")
                     display(HTML(html_table),target=f"sem{i}")
                     display(plt,target=f"sem{i}")
+                    collection = document.getElementsByTagName("td")
+                    for l in range(collection.length):
+                        if collection[l].innerHTML=="0":
+                            collection[l].style.color="red"
+
                     str=f"Total Marks: {total1} Overall Rank: {rank_m}"
                     display(str,target=f"se{i}")
                     total+=total1
@@ -197,8 +214,11 @@ font-size:25px;
                     html_table=""
                     cnt+=1
                 else:
+                    ele2=document.getElementById(f"se{i}")
+                    ele2.style.width="0px"
                     continue
-            display(f"Overall Marks : {total}",target="sem")
+
+            display(f"Grand Total : {total}",target="sem")
             if total>3000:
                 el=document.getElementById("ima")
                 el.setAttribute("src","https://raw.githubusercontent.com/Thirupathirao-Dirisala/Results/main/celeb.webp")
